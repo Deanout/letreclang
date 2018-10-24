@@ -26,7 +26,7 @@
           (apply-env saved-env search-var)))
       (extend-env-rec (pname bvar pbody saved-env)
         (if (eqv? search-var pname)
-          (proc-val (procedure pbody env))
+          (proc-val (procedure bvar pbody env))
           (apply-env saved-env search-var))))))
 
 ; Datatype (Figure 3.6, p. 69)
@@ -329,3 +329,8 @@ in let f = proc (z) -(z,x)
 in let x = 100
 in let g = proc (z) -(z,x)
 in -((f 1), (g 1))")
+(define letrectest
+"letrec double(x) = if zero?(x)
+then 0
+else -((double -(x,1)), -2)
+in (double 6)")
